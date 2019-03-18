@@ -1,0 +1,88 @@
+Docker install
+--------------
+sudo yum update -y
+
+sudo yum install -y docker
+
+sudo service docker start
+
+sudo usermod -a -G docker ec2-user
+
+docker info
+permission denied
+
+Needs server reboot
+
+Now check 
+
+docker info
+docker --version
+:
+To install wordpress and mysql
+------------------------------
+docker pull wordpress
+
+docker pull mysql
+
+docker images
+
+
+docker ps -a
+
+docker logs <containerid>
+
+docker run --name mysqlwpress -d mysql
+
+docker run --name mysqlwpress -e MYSQL_ROOT_PASSWORD=wordpress -d mysql
+
+docker ps -a	
+
+To link the containers wordpress and mysql
+------------------------------------------
+docker run --name wordpress --link mysqlwp:mysql -p 80:80 -d wordpress
+
+docker ps
+
+To login mysql container
+-----------------------
+docker exec -it <containerid> bash
+
+to login mysql
+
+mysql -u root -p
+
+mysql> show databases
+
+mysql> 
+
+To alter the password
+---------------------
+mysql> alter user 'root'@'localhost' identified with mysql_native_password by 'wordpress'
+mysql> alter user 'root'@'%' identified with mysql_native_password by 'wordpress'
+
+to come out from mysql
+
+control p q
+
+
+docker run --name wordpress --link mysqlwp:mysql -p 80:80 -d wordpress
+
+if not run remove the wordpress and try again using
+
+docker rm wordpress
+
+
+docker ps 
+
+
+Now in browser access <localhost:80>
+
+In wordpress add the language and create user and password
+
+
+
+
+
+
+
+
