@@ -95,14 +95,14 @@ $ docker exec -it <imagename> pwd
 $docker ps -a
 
 
-$docker container run -itd --name cont_nginx -p 808:80/tcp img_expose
+$docker container run -itd --name cont_nginx -p 8080:80/tcp nginx
 
 
 $ docker ps -a
 
 Another container
 
-$ docker container run -itd --name cont_nginx-A -P img_expose
+$ docker container run -itd --name cont_nginx-A -P nginx
 
 $docker ps -a
 
@@ -160,6 +160,115 @@ docker network ls --filter driver=bridge
 Working with Docker
 -------------------
 docker ps -a
+
+If container not runnning and exited then
+
+docker start <imagename>
+
+docker network ls
+
+docker network connect <networkname> <imagename>
+
+docker container inspect <imagename>
+
+docker container run -itd --network host --name cont_nginx nginx:latest
+
+docner container port cont_nginx
+
+docker container inspect cont_nginx
+
+docker network inspect bridge
+
+docker network inspect my-bridge-1
+
+
+
+
+
+
+
+
+
+
+
+
+
+docker network disconnect my-bridge my-ububtu
+
+
+
+Docker storage
+----------------
+volumes -- dedicated directories in host system
+
+Bind mounts
+
+tmpfs (host memory)
+
+docker volume create vol-busybox
+
+docker run -d --volume col-ubuntu:/tmp ubuntu
+
+docker volume ls
+
+docker volume inspect vol-ubuntu
+
+docker volume rm vol-ubuntu
+
+
+
+Mounting volume to containers
+-------------------------------
+
+create colume
+
+docker run -itd --name cont-ubuntu --volume vol-ubuntu:/var/log ubuntu:latest
+
+docker volume ls
+
+docker exec -it cont-ubuntu bash
+
+apt-get update
+
+cd /var/log
+
+exit
+
+$docker stop cont-ubuntu
+
+$sudo su -
+
+cd /var/lib/docker/volumes
+
+cd vol-ubuntu
+
+ls
+
+cd data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
