@@ -39,7 +39,7 @@ docker ps -a
 
 To link the containers wordpress and mysql
 ------------------------------------------
-docker run --name wordpress --link mysqlwp:mysql -p 80:80 -d wordpress
+docker run --name wordpress --link mysqlwpress:mysql -p 80:80 -d wordpress
 
 docker ps
 
@@ -49,7 +49,7 @@ docker exec -it <containerid> bash
 
 to login mysql
 
-mysql -u root -p
+# mysql -u root -p
 
 mysql> show databases
 
@@ -65,7 +65,7 @@ to come out from mysql
 control p q
 
 
-docker run --name wordpress --link mysqlwp:mysql -p 80:80 -d wordpress
+docker run --name wordpress --link mysqlwpress:mysql -p 80:80 -d wordpress
 
 if not run remove the wordpress and try again using
 
@@ -78,6 +78,92 @@ docker ps
 Now in browser access <localhost:80>
 
 In wordpress add the language and create user and password
+
+
+
+Container more
+---------------------
+$docker ps -a
+
+$docker container attach <image>
+#ls
+#exit
+$docker ps -a
+$docker container start <imagename>
+$ docker exec -it <imagename> pwd
+/
+$docker ps -a
+
+
+$docker container run -itd --name cont_nginx -p 808:80/tcp img_expose
+
+
+$ docker ps -a
+
+Another container
+
+$ docker container run -itd --name cont_nginx-A -P img_expose
+
+$docker ps -a
+
+$docker container port cont_nginx
+
+localhost:80
+localhost:32768
+
+Both reveals the same
+
+Cleanup
+--------
+docker ps -a
+
+docker container rm <imagename>
+
+docker container rm <containerid>
+
+docker container rm <imagename> --force
+
+docker container prune
+
+the above removes the stop container
+
+
+
+Networking
+----------
+docker network drivers
+
+
+
+
+
+
+
+
+
+Host n/w infrastructure
+
+Native network docker drivers
+
+Create docker networks
+-----------------------
+
+docker network create --driver bridge my-bridge
+
+docker network create --driver bridge --subnet=192.168.0.0./16 --iprange=192.168.5.0/24 my-bridge-1
+
+docker network ls
+
+docker network ls --filter driver=bridge
+
+
+Working with Docker
+-------------------
+docker ps -a
+
+
+
+
 
 
 
